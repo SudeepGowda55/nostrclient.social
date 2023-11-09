@@ -51,7 +51,7 @@ const Search = () => {
             <div>
                 {(searches.length) > 0 ?
                     (searches.map((event) => (
-                        <div key={event.id} className="flex flex-col">
+                        <div key={event.id} className="flex flex-col w-[80vw]">
                             <p className='bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black my-6 mx-[8vw] p-10 rounded-2xl'> {event.content} </p>
                         </div>
                     )))
