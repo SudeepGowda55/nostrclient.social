@@ -32,7 +32,7 @@ export default function Home() {
         {(messages.length) > 0 ?
           (messages.map((message) => (
             <div key={message.id} className="flex flex-col w-[80vw]">
-              <p className='bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-white my-6 mx-[8vw] p-10 rounded-2xl'> {message.content} </p>
+              <p className='bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black my-6 mx-[8vw] p-10 rounded-2xl'> {message.content} </p>
             </div>
           )))
           :
