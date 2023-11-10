@@ -4,6 +4,7 @@ import { Event } from "nostr-tools";
 import { useEffect, useState } from "react";
 import { Relays, Pool } from "@/utils/nostr";
 import UserMetadataType from "@/types/usersmetadata";
+import Link from "next/link";
 
 export default function Home() {
 
@@ -17,7 +18,7 @@ export default function Home() {
     const sub = Pool.sub(Relays, [
       {
         kinds: [1],
-        limit: 20,
+        limit: 1,
       }
     ])
 
@@ -46,16 +47,22 @@ export default function Home() {
   }, [messages, Pool])
 
   return (
-    <main className="flex min-h-screen flex-col items-center justify-between p-24 max-w-[100vw]">
-      <p> Nostr Client </p>
-      <div>
+    <main className="flex min-h-screen flex-col items-center justify-between p-10 max-w-[100vw]">
+      <div className="flex flex-row items-center justify-between w-[90vw]">
+        <p className="text-6xl"> Nostr Client </p>
+        <span className=" flex flex-row space-x-10">
+          <Link href={"/search"}><p className="text-lg">Search</p></Link>
+          <Link href={"/login"}><p className="text-lg">Login</p></Link>
+          <Link href={"/newacc"}><p className="text-lg">Create Account</p></Link>
+        </span>
+      </div>
+
+      <div className="mt-16">
         {(messages.length) > 0 ?
           (messages.map((message, index) => (
-            <div key={`${message.id}_${index}`} className="flex flex-col w-[80vw]">
-              <span className="bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black">
-                <p className=" mx-[8vw]">{usersMetaData[message.pubkey]?.name}</p>
-                <p className=' my-6 mx-[8vw] p-10 rounded-2xl'> {message.content} </p>
-              </span>
+            <div key={message.id} className="flex flex-col w-[80vw]">
+              <p className=" mx-[8vw]">{usersMetaData[message.pubkey]?.name}</p>
+              <p className=' my-6 mx-[8vw] p-10 rounded-2xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black'> {message.content} </p>
             </div>
           )))
           :
