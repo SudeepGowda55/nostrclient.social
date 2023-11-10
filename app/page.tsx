@@ -18,7 +18,7 @@ export default function Home() {
     const sub = Pool.sub(Relays, [
       {
         kinds: [1],
-        limit: 1,
+        limit: 10,
       }
     ])
 
@@ -60,9 +60,17 @@ export default function Home() {
       <div className="mt-16">
         {(messages.length) > 0 ?
           (messages.map((message, index) => (
-            <div key={message.id} className="flex flex-col w-[80vw]">
-              <p className=" mx-[8vw]">{usersMetaData[message.pubkey]?.name}</p>
-              <p className=' my-6 mx-[8vw] p-10 rounded-2xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black'> {message.content} </p>
+            <div key={`${message.id}_${index}`} className="flex flex-col w-[80vw]">
+              <span className="flex flex-row mx-[8vw] items-center justify-between">
+                <span className="flex flex-row">
+                  <img src={usersMetaData[message.pubkey]?.picture} alt="User Profile" className="w-[2vw] rounded-2xl" />
+                  <p className="mx-[1vw] pt-1">{usersMetaData[message.pubkey]?.name}</p>
+                </span>
+                <span>
+                  <p>Posted at: {message.created_at}</p>
+                </span>
+              </span>
+              <p className='my-6 mx-[8vw] p-10 rounded-2xl bg-gradient-to-r from-pink-300 via-purple-300 to-indigo-400 text-black'> {message.content} </p>
             </div>
           )))
           :
